@@ -131,7 +131,7 @@ function Library:CreateWindow(Name)
 	
 	TurnBack.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent["Tab Selected"].Visible = false
-		if TabSelected then game:GetService("TweenService"):Create(script.Parent.Parent.Parent["Tab Selected"], TweenInfo.new(0.3), {Position = UDim2.new(1, 0, 0.101, 0)}):Play() end
+		if TabSelected then game:GetService("TweenService"):Create(TabSelected, TweenInfo.new(0.3), {Position = UDim2.new(1, 0, 0.101, 0)}):Play() end
 		game:GetService("TweenService"):Create(TurnBack, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
 		game:GetService("TweenService"):Create(TabsSelect, TweenInfo.new(0.3), {Position = UDim2.new(0, 0, 0.101, 0)}):Play()
 	end)
@@ -233,35 +233,25 @@ function Library:CreateWindow(Name)
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = Button
 			
-			            Sample.Name = "Sample"
-                        Sample.Parent = Handler
-                        Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                        Sample.BackgroundTransparency = 1.000
-                        Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
-                        Sample.ImageColor3 = Color3.fromRGB(167, 167, 167)
-                        Sample.ImageTransparency = 0.600
-			
-			            local btn = Button
-						local sample = Sample
-
-						btn.MouseButton1Click:Connect(function()
-							local c = sample:Clone()
-							c.Parent = btn
-							local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-							c.Position = UDim2.new(0, x, 0, y)
-							local len, size = 0.35, nil
-							if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-								size = (btn.AbsoluteSize.X * 1.5)
-							else
-								size = (btn.AbsoluteSize.Y * 1.5)
-							end
-							c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-							for i = 1, 10 do
-								c.ImageTransparency = c.ImageTransparency + 0.05
-								wait(len / 12)
-							end
-							c:Destroy()
-						end)
+			Button.MouseButton1Click:Connect(function()
+			local btn = Button
+			local sample = Sample
+			local c = sample:Clone()
+			c.Parent = btn
+			c.Position = UDim2.new(btn.Position)
+			local len, size = 0.35, nil
+			if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
+				size = (btn.AbsoluteSize.X * 1.5)
+			else
+				size = (btn.AbsoluteSize.Y * 1.5)
+			end
+			c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+			for i = 1, 10 do
+				c.ImageTransparency = c.ImageTransparency + 0.05
+				wait(len / 12)
+			end
+				c:Destroy()
+			end)
 		end
 		-- Create TabButton
 		
